@@ -3,13 +3,330 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Pagination</title>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: #f8f9fa;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .content-section {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        display: none;
+      }
+
+      .content-section.active {
+        display: block;
+      }
+
+      .content-section img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+
+      .content-section h2 {
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+
+      .content-section p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+      }
+
+      .pagination button {
+        padding: 10px 17px;
+        border: 1px solid #ddd;
+        background: white;
+        color: #666;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .pagination button:hover:not(:disabled) {
+        background-color: #f0f7ff;
+        color: #2563eb;
+      }
+
+      .pagination button:disabled {
+        color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .pagination .prev {
+        border-radius: 6px 0 0 6px;
+      }
+
+      .pagination .next {
+        border-radius: 0 6px 6px 0;
+      }
+
+      .pagination .numbers {
+        display: flex;
+      }
+
+      .pagination .numbers button {
+        border-right: none;
+      }
+
+      .pagination .numbers button:last-child {
+        border-right: 1px solid #ddd;
+      }
+
+      .pagination .numbers button.active {
+        background-color: #f0f7ff;
+        color: #2563eb;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 95%;
+          padding: 15px;
+        }
+
+        .content-section {
+          padding: 25px;
+        }
+
+        .content-section h2 {
+          font-size: 17px;
+        }
+
+        .content-section p {
+          font-size: 14px;
+        }
+
+        .pagination button {
+          padding: 8px 15px;
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .container {
+          width: 100%;
+          padding: 10px;
+        }
+
+        .content-section {
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+
+        .content-section h2 {
+          font-size: 15px;
+        }
+
+        .content-section p {
+          font-size: 13px;
+        }
+
+        .pagination button {
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .container {
+          padding: 5px;
+        }
+
+        .content-section {
+          padding: 15px;
+          margin-bottom: 15px;
+        }
+
+        .content-section h2 {
+          font-size: 13px;
+        }
+
+        .content-section p {
+          font-size: 11px;
+          line-height: 1.5;
+        }
+
+        .pagination button {
+          padding: 6px 10px;
+          font-size: 13px;
+        }
+
+        .pagination .numbers button {
+          padding: 6px 10px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .pagination {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .pagination .numbers {
+          order: 1;
+          width: 100%;
+          justify-content: center;
+          margin-bottom: 10px;
+        }
+
+        .pagination .prev {
+          order: 2;
+          border-radius: 6px;
+        }
+
+        .pagination .next {
+          order: 3;
+          border-radius: 6px;
+        }
+      }
+      @media (max-width: 250px) {
+        body {
+          padding: 20px 10px;
+        }
+        .content-section h2 {
+          font-size: 11px;
+        }
+
+        .content-section p {
+          font-size: 10px;
+          line-height: 1.5;
+        }
+      }
     </style>
   </head>
-  <body></body>
-  <script>
-    // write javascript here
-  </script>
+  <body>
+    <div class="container">
+      <div class="content-section active">
+        <h2>Page 1</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+          tempore! Incidunt iure similique sed cum consequatur veritatis
+          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
+          officia, quia, eius laboriosam provident iste.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 2</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+          tempore! Incidunt iure similique sed cum consequatur veritatis
+          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
+          officia, quia, eius laboriosam provident iste.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 3</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+          tempore! Incidunt iure similique sed cum consequatur veritatis
+          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
+          officia, quia, eius laboriosam provident iste.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 4</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+          tempore! Incidunt iure similique sed cum consequatur veritatis
+          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
+          officia, quia, eius laboriosam provident iste.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 5</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+          tempore! Incidunt iure similique sed cum consequatur veritatis
+          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
+          officia, quia, eius laboriosam provident iste.
+        </p>
+      </div>
+
+      <div class="pagination">
+        <button class="prev" disabled>Previous</button>
+        <div class="numbers">
+          <button class="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+          <button>5</button>
+        </div>
+        <button class="next">Next</button>
+      </div>
+    </div>
+
+    <script>
+      const contentSections = document.querySelectorAll(".content-section");
+      const numberButtons = document.querySelectorAll(".numbers button");
+      const prevButton = document.querySelector(".prev");
+      const nextButton = document.querySelector(".next");
+      let currentPage = 1;
+
+      function showPage(pageNumber) {
+        contentSections.forEach((section, index) => {
+          section.classList.toggle("active", index + 1 === pageNumber);
+        });
+
+        numberButtons.forEach((button, index) => {
+          button.classList.toggle("active", index + 1 === pageNumber);
+        });
+
+        prevButton.disabled = pageNumber === 1;
+        nextButton.disabled = pageNumber === contentSections.length;
+
+        currentPage = pageNumber;
+      }
+
+      numberButtons.forEach((button, index) => {
+        button.addEventListener("click", () => showPage(index + 1));
+      });
+
+      prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+          showPage(currentPage - 1);
+        }
+      });
+
+      nextButton.addEventListener("click", () => {
+        if (currentPage < contentSections.length) {
+          showPage(currentPage + 1);
+        }
+      });
+    </script>
+  </body>
 </html>

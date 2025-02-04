@@ -3,13 +3,323 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Modal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        position: relative;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+      .dialog,
+      .backdrop {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .dialog {
+        z-index: 10;
+        height: 28rem;
+        width: 75rem;
+        border-radius: 1.2rem;
+        background-color: #fff;
+        padding: 3.5rem;
+        box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-template-columns: max-content 1fr max-content;
+        align-items: center;
+        grid-gap: 1.7rem;
+      }
+      .dialog__warning {
+        cursor: pointer;
+        align-self: start;
+        grid-row: 1 / span 2;
+        display: grid;
+        place-items: center;
+        height: 5.5rem;
+        width: 5.5rem;
+        border-radius: 50%;
+        background-color: #ffe2e2;
+      }
+      .dialog__warning-icon {
+        height: 3.2rem;
+        width: 3.2rem;
+        stroke: #eb1a1e;
+      }
+      .dialog__heading {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin: 0rem 0rem -1rem 0.5rem;
+        color: #333;
+      }
+      .dialog__close {
+        transform: translate(1rem, -1rem);
+        grid-row: 1 / span 2;
+        grid-column: -2/ -1;
+        align-self: start;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      .dialog__close-icon {
+        height: 2.8rem;
+        width: 2.8rem;
+        stroke: #999;
+        transition: all 0.2s;
+      }
+      .dialog__close:hover .dialog__close-icon {
+        stroke: #333;
+      }
+      .dialog__content {
+        align-self: start;
+        color: #888;
+        font-size: 2rem;
+        font-weight: 400;
+        margin: 0 -1rem 0 0.5rem;
+      }
+      .dialog__actions {
+        align-self: center;
+        grid-column: 1/ -1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 2rem;
+      }
+      .action {
+        font-size: 2rem;
+        font-weight: 600;
+        border-radius: 0.8rem;
+        line-height: 1;
+        padding: 1.5rem;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+      .action:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+      }
+      .action--secondary {
+        color: #333;
+        border: 1px solid #999;
+        background-color: #fff;
+      }
+      .action--secondary:hover {
+        background-color: #ebebeb;
+      }
+      .action--primary {
+        color: #ffe2e2;
+        border: none;
+        background-color: #eb1a1e;
+      }
+      .action--primary:hover {
+        background-color: #ce0606;
+      }
+      .action--primary:focus {
+        outline: none;
+        box-shadow: 0 0.5rem 1rem rgba(226, 38, 41, 0.5);
+      }
+      .backdrop {
+        background-color: #848a96;
+        height: 100%;
+        width: 100%;
+        z-index: 5;
+      }
+      .is-hidden {
+        display: none;
+      }
+      @media only screen and (max-width: 50em) {
+        html {
+          font-size: 54%;
+        }
+      }
+      @media only screen and (max-width: 43.75em) {
+        html {
+          font-size: 45%;
+        }
+      }
+      @media only screen and (max-width: 37.5em) {
+        html {
+          font-size: 44%;
+        }
+        .dialog {
+          width: 62rem;
+          padding: 2.4rem;
+          gap: 1.2rem;
+        }
+        .dialog__close {
+          transform: translate(0.5rem, -0.5rem);
+        }
+        .dialog__close-icon {
+          height: 2.4rem;
+          width: 2.4rem;
+        }
+      }
+      @media only screen and (max-width: 31.25em) {
+        html {
+          font-size: 42%;
+        }
+        .dialog {
+          width: 55rem;
+        }
+      }
+      @media only screen and (max-width: 25em) {
+        .dialog__heading {
+          margin-top: -1.2rem;
+        }
+        .dialog {
+          width: 45rem;
+        }
+        .dialog__warning {
+          height: 5rem;
+          width: 5rem;
+        }
+        .dialog__warning,
+        .dialog__close {
+          grid-row: 1/ 1;
+        }
+        .dialog__warning {
+          height: 3.6rem;
+          width: 3.6rem;
+        }
+        .dialog__warning-icon {
+          height: 2.4rem;
+          width: 2.4rem;
+        }
+        .dialog__content {
+          grid-column: 1/ -1;
+        }
+      }
+      @media only screen and (max-width: 18.75em) {
+        .dialog__heading {
+          margin-top: -2rem;
+        }
+        .dialog {
+          width: 30rem;
+          height: 50rem;
+        }
+        .action{
+          padding: 1rem;
+        }
+      }
+      @media only screen and (max-width: 12.5em) {
+        .dialog {
+          padding: 1.5rem;
+          gap: 1rem;
+          width: 25rem;
+          height: 40rem;
+        }
+        .dialog__content {
+          font-size: 1.6rem;
+        }
+        .dialog__warning {
+          margin-top: 0.7rem;
+          height: 3.5rem;
+          width: 3.5rem;
+        }
+        .dialog__warning-icon {
+          height: 2rem;
+          width: 2rem;
+        }
+        .action{
+          padding: 1rem;
+        }
+      }
     </style>
   </head>
-  <body></body>
-  <script>
-    // write javascript here
-  </script>
+  <body>
+    <button class="action action--primary trigger-dialog">
+      Delete account
+    </button>
+    <div class="dialog is-hidden">
+      <span class="dialog__warning">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="dialog__warning-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          />
+        </svg>
+      </span>
+      <h2 class="dialog__heading">Deactivate account</h2>
+      <button class="dismiss dialog__close">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="dialog__close-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+      <p class="dialog__content">
+        Are you sure you want to deactivate your account? All of your data will
+        be permanently removed from our servers forever. This action cannot be
+        undone.
+      </p>
+      <div class="dialog__actions">
+        <button class="action action--secondary dismiss">Cancel</button>
+        <button class="action action--primary dismiss">Deactivate</button>
+      </div>
+    </div>
+    <div class="backdrop is-hidden"></div>
+
+    <script>
+      const dialog = document.querySelector(".dialog");
+      const backdrop = document.querySelector(".backdrop");
+      const openTrigger = document.querySelector(".trigger-dialog");
+      const closeTriggers = document.querySelectorAll(".dismiss");
+
+      function showDialog() {
+        dialog.classList.remove("is-hidden");
+        backdrop.classList.remove("is-hidden");
+      }
+
+      function hideDialog() {
+        dialog.classList.add("is-hidden");
+        backdrop.classList.add("is-hidden");
+      }
+
+      openTrigger.addEventListener("click", showDialog);
+      closeTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", hideDialog);
+      });
+
+      backdrop.addEventListener("click", hideDialog);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !dialog.classList.contains("is-hidden")) {
+          hideDialog();
+        }
+      });
+    </script>
+  </body>
 </html>

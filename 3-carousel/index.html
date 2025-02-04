@@ -3,13 +3,255 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Carousel</title>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        width: 100%;
+        height: 100%;
+        font-size: 62.5%;
+        overflow-x: hidden;
+        overflow-y: hidden;
+      }
+      body {
+        font-family: "Poppins";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        max-width: 100vw;
+        height: 100%;
+        max-height: 100vh;
+        background-color: #4b4b4d;
+      }
+      .gallery-wrap {
+        border-radius: 20px;
+        align-self: center;
+        display: flex;
+        width: 38%;
+        max-width: 100%;
+        min-width: 32rem;
+        height: 40%;
+      }
+      .gallery-content {
+        width: 100%;
+        align-self: stretch;
+        position: relative;
+      }
+      .gallery-item {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: opacity 0.4s ease-in;
+        opacity: 0;
+        flex-shrink: 0;
+        background-size: contain;
+        background-position: center;
+        display: none;
+      }
+      .gallery-item.active-slide {
+        display: block;
+        opacity: 1;
+      }
+      .prev-arrow,
+      .next-arrow {
+        position: absolute;
+        z-index: 100;
+        background-color: #8e96a3;
+        border-radius: 50%;
+        color: #fdfdfd;
+        display: flex;
+        border: 3px solid transparent;
+        align-items: center;
+        padding: 5px;
+        transition: border 0.5s;
+        top: 45%;
+      }
+      .prev-arrow:hover,
+      .next-arrow:hover {
+        cursor: pointer;
+        border: 3px solid #fdfdfd;
+      }
+      .chevron-icon {
+        font-size: 2.4rem;
+      }
+      .next-arrow {
+        right: 2%;
+      }
+      .prev-arrow {
+        left: 2%;
+      }
+      .nav-dots {
+        display: flex;
+        position: absolute;
+        bottom: 3.5%;
+        left: 42%;
+        gap: 0.8rem;
+      }
+      .dot.current-dot {
+        color: white;
+        font-size: 1.5rem;
+      }
+      .dot {
+        color: #9fa3b1;
+        font-size: 1.5rem;
+      }
+      @media (max-width: 1600px) {
+        .gallery-wrap {
+          height: 40%;
+          width: 40%;
+        }
+      }
+      @media (max-width: 1400px) {
+        .gallery-wrap {
+          height: 38%;
+          width: 48%;
+        }
+      }
+      @media (max-width: 1200px) {
+        .gallery-wrap {
+          height: 36%;
+          width: 52%;
+        }
+      }
+      @media (max-width: 1000px) {
+        .gallery-wrap {
+          height: 55%;
+          width: 90%;
+        }
+      }
+      @media (max-width: 800px) {
+        .gallery-wrap {
+          height: 45%;
+        }
+      }
+      @media (max-width: 600px) {
+        .prev-arrow,
+        .next-arrow {
+          padding: 2px;
+        }
+        .nav-dots {
+          gap: 0.6rem;
+        }
+        .dot.current-dot {
+          font-size: 1.2rem;
+        }
+        .dot {
+          font-size: 1.2rem;
+        }
+        .gallery-wrap {
+          height: 35%;
+        }
+      }
+      @media (max-width: 400px) {
+        .prev-arrow,
+        .next-arrow {
+          padding: 1px;
+        }
+        .nav-dots {
+          gap: 0.4rem;
+        }
+        .dot.current-dot {
+          font-size: 1rem;
+        }
+        .dot {
+          font-size: 1rem;
+        }
+        .gallery-wrap {
+          height: 25%;
+          width: 70%;
+        }
+      }
+      @media (max-width: 300px) {
+        .gallery-wrap {
+          height: 20%;
+          width: 10%;
+        }
+      }
+      @media (max-width: 200px) {
+        .gallery-wrap {
+          height: 20%;
+        }
+      }
     </style>
   </head>
-  <body></body>
-  <script>
-    // write javascript here
-  </script>
+  <body>
+    <section class="gallery-wrap">
+      <div class="gallery-content">
+        <button class="prev-arrow">
+          <ion-icon class="chevron-icon" name="chevron-back-outline"></ion-icon>
+        </button>
+        <img src="img/f1.jpg" alt="" class="gallery-item active-slide" />
+        <img src="img/f2.jpg" alt="" class="gallery-item" />
+        <img src="img/f3.jpg" alt="" class="gallery-item" />
+        <img src="img/f4.jpg" alt="" class="gallery-item" />
+        <img src="img/f5.jpg" alt="" class="gallery-item" />
+        <button class="next-arrow">
+          <ion-icon
+            class="chevron-icon"
+            name="chevron-forward-outline"
+          ></ion-icon>
+        </button>
+        <div class="nav-dots">
+          <ion-icon class="dot dot-1 current-dot" name="ellipse"></ion-icon>
+          <ion-icon class="dot dot-2" name="ellipse"></ion-icon>
+          <ion-icon class="dot dot-3" name="ellipse"></ion-icon>
+          <ion-icon class="dot dot-4" name="ellipse"></ion-icon>
+          <ion-icon class="dot dot-5" name="ellipse"></ion-icon>
+        </div>
+      </div>
+    </section>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      let currentIndex;
+      const prevArrow = document.querySelector(".prev-arrow");
+      const nextArrow = document.querySelector(".next-arrow");
+      const slides = document.querySelectorAll(".gallery-item");
+      const dots = document.querySelectorAll(".dot");
+      slides.forEach((slide, index) => {
+        if (slide.classList.contains("active-slide")) {
+          currentIndex = index;
+        }
+      });
+      function updateActiveSlide() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove("active-slide");
+          if (index === currentIndex) {
+            slide.classList.add("active-slide");
+          }
+        });
+      }
+      function updateDots() {
+        dots.forEach((dot) => {
+          if (dot.classList.contains("current-dot")) {
+            dot.classList.remove("current-dot");
+            dots[currentIndex].classList.add("current-dot");
+          }
+        });
+      }
+      nextArrow.addEventListener("click", function () {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateActiveSlide();
+        updateDots();
+      });
+      prevArrow.addEventListener("click", function () {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateActiveSlide();
+        updateDots();
+      });
+    </script>
+  </body>
 </html>

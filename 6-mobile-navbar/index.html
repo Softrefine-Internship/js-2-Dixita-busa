@@ -3,13 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Mobile-Navbar</title>
     <style>
-      /* write CSS here */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        font-family: "Rubik", sans-serif;
+        line-height: 1;
+        font-weight: 400;
+        color: #555;
+        overflow-x: hidden;
+      }
+      .main-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fdf2e9;
+        height: 9.6rem;
+        padding: 0 4.8rem;
+        position: relative;
+      }
+      .brand-logo {
+        height: 2.2rem;
+      }
+      .menu-items {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 4.8rem;
+      }
+      .menu-anchor:link,
+      .menu-anchor:visited {
+        display: inline-block;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        font-size: 1.8rem;
+        transition: all 0.3s;
+      }
+      .menu-anchor:hover,
+      .menu-anchor:active {
+        color: #cf711f;
+      }
+      .menu-anchor.action-btn:link,
+      .menu-anchor.action-btn:visited {
+        color: #fff;
+        background-color: #e67222;
+        padding: 1.2rem 2.4rem;
+        border-radius: 0.9rem;
+      }
+      .menu-anchor.action-btn:hover,
+      .menu-anchor.action-btn:active {
+        background-color: #cf711f;
+      }
+      .mobile-toggle {
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: none;
+      }
+      @media only screen and (max-width: 75em) {
+        html {
+          font-size: 56.25%;
+        }
+        .main-header {
+          padding: 0 3.2rem;
+        }
+        .menu-items {
+          gap: 3.2rem;
+        }
+      }
+      @media only screen and (max-width: 50em) {
+        html {
+          font-size: 50%;
+        }
+        .mobile-toggle {
+          display: block;
+          padding: 0rem 0.8rem;
+          height: 4.5rem;
+          z-index: 100;
+        }
+        .navigation {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          transform: translateX(100%);
+          transition: all 0.5s ease-in;
+          opacity: 0;
+          pointer-events: none;
+          visibility: hidden;
+        }
+        .menu-open .navigation {
+          opacity: 1;
+          pointer-events: auto;
+          visibility: visible;
+          transform: translateX(0);
+        }
+        .menu-items {
+          flex-direction: column;
+          gap: 4.8rem;
+        }
+        .menu-anchor:link,
+        .menu-anchor:visited {
+          font-size: 3rem;
+        }
+        .icons {
+          position: relative;
+        }
+        .icons,
+        .icons::before,
+        .icons::after {
+          display: block;
+          height: 0.25rem;
+          width: 3rem;
+          border-radius: 100px;
+          background-color: #333;
+          transition: all 0.3s;
+        }
+        .icons::before,
+        .icons::after {
+          content: "";
+          position: absolute;
+          left: 0;
+        }
+        .icons::before {
+          top: -1rem;
+        }
+        .icons::after {
+          bottom: -1rem;
+        }
+        .menu-open .icons {
+          background-color: rgba(255, 255, 255, 0.9);
+        }
+        .menu-open .icons::before {
+          top: 0;
+          transform: rotate(135deg);
+        }
+        .menu-open .icons::after {
+          bottom: 0;
+          transform: rotate(-135deg);
+        }
+      }
+      *:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+      }
     </style>
   </head>
-  <body></body>
+  <body>
+    <header class="main-header">
+      <a href="#">
+        <img
+          class="brand-logo"
+          alt="Omnifood logo"
+          src="img/omnifood-logo.png"
+        />
+      </a>
+      <nav class="navigation">
+        <ul class="menu-items">
+          <li><a class="menu-anchor" href="#how">How it works</a></li>
+          <li><a class="menu-anchor" href="#meals">Meals</a></li>
+          <li>
+            <a class="menu-anchor" href="#testimonials">Testimonials</a>
+          </li>
+          <li><a class="menu-anchor" href="#pricing">Pricing</a></li>
+          <li>
+            <a class="menu-anchor action-btn" href="#cta">Try for free</a>
+          </li>
+        </ul>
+      </nav>
+      <button class="mobile-toggle">
+        <span class="icons"></span>
+      </button>
+    </header>
+  </body>
   <script>
-    // write javascript here
+    const toggleBtn = document.querySelector(".mobile-toggle");
+    const headerEl = document.querySelector(".main-header");
+    const menuLinks = document.querySelectorAll(".menu-anchor");
+    toggleBtn.addEventListener("click", function () {
+      headerEl.classList.toggle("menu-open");
+    });
+    for (let i = 0; i < menuLinks.length; i++) {
+      menuLinks[i].addEventListener("click", function () {
+        headerEl.classList.remove("menu-open");
+      });
+    }
   </script>
 </html>
