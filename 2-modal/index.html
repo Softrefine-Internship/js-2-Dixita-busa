@@ -27,13 +27,17 @@
         font-family: "Poppins", sans-serif;
         font-weight: 400;
         line-height: 1.5;
+        background-image: url('https://source.unsplash.com/random/1920x1080');
+        background-size: cover;
+        background-position: center;
       }
       .dialog,
       .backdrop {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        transition: all 0.3s ease-in-out;
       }
       .dialog {
         z-index: 10;
@@ -47,6 +51,13 @@
         grid-template-columns: max-content 1fr max-content;
         align-items: center;
         grid-gap: 1.7rem;
+        opacity: 1;
+        visibility: visible;
+      }
+      .dialog.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -45%);
       }
       .dialog__warning {
         cursor: pointer;
@@ -136,14 +147,23 @@
         box-shadow: 0 0.5rem 1rem rgba(226, 38, 41, 0.5);
       }
       .backdrop {
-        background-color: #848a96;
+        background-color:  rgba(119, 125, 140, 0.95);  
         height: 100%;
         width: 100%;
         z-index: 5;
+        opacity: 1;
+        visibility: visible;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        transition: all 0.3s ease-in-out;
       }
-      .is-hidden {
-        display: none;
+      .backdrop.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        backdrop-filter: blur(0);
+        -webkit-backdrop-filter: blur(0);
       }
+      
       @media only screen and (max-width: 50em) {
         html {
           font-size: 54%;

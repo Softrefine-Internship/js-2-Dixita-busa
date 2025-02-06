@@ -36,25 +36,32 @@
         display: block;
       }
 
-      .content-section img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-bottom: 20px;
-      }
-
       .content-section h2 {
         color: #1a1a1a;
         margin-bottom: 15px;
-        font-size: 20px;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .content-section .emoji {
+        font-size: 28px;
       }
 
       .content-section p {
         color: #666;
         font-size: 16px;
-        line-height: 1.5;
+        line-height: 1.6;
         margin-bottom: 15px;
+      }
+
+      .content-section .highlight {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        margin-top: 15px;
+        border-left: 4px solid #2563eb;
       }
 
       .pagination {
@@ -109,6 +116,30 @@
         color: #2563eb;
       }
 
+      .pagination .dots {
+        padding: 10px 17px;
+        border: 1px solid #ddd;
+        border-right: none;
+        background: white;
+        color: #666;
+        cursor: default;
+      }
+
+      .tags {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background-color: #f0f7ff;
+        color: #2563eb;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+      }
+
       @media (max-width: 768px) {
         .container {
           width: 95%;
@@ -117,73 +148,6 @@
 
         .content-section {
           padding: 25px;
-        }
-
-        .content-section h2 {
-          font-size: 17px;
-        }
-
-        .content-section p {
-          font-size: 14px;
-        }
-
-        .pagination button {
-          padding: 8px 15px;
-          font-size: 15px;
-        }
-      }
-
-      @media (max-width: 576px) {
-        .container {
-          width: 100%;
-          padding: 10px;
-        }
-
-        .content-section {
-          padding: 20px;
-          margin-bottom: 20px;
-        }
-
-        .content-section h2 {
-          font-size: 15px;
-        }
-
-        .content-section p {
-          font-size: 13px;
-        }
-
-        .pagination button {
-          padding: 8px 12px;
-          font-size: 14px;
-        }
-      }
-
-      @media (max-width: 420px) {
-        .container {
-          padding: 5px;
-        }
-
-        .content-section {
-          padding: 15px;
-          margin-bottom: 15px;
-        }
-
-        .content-section h2 {
-          font-size: 13px;
-        }
-
-        .content-section p {
-          font-size: 11px;
-          line-height: 1.5;
-        }
-
-        .pagination button {
-          padding: 6px 10px;
-          font-size: 13px;
-        }
-
-        .pagination .numbers button {
-          padding: 6px 10px;
         }
       }
 
@@ -210,81 +174,63 @@
           border-radius: 6px;
         }
       }
-      @media (max-width: 250px) {
-        body {
-          padding: 20px 10px;
-        }
-        .content-section h2 {
-          font-size: 11px;
-        }
-
-        .content-section p {
-          font-size: 10px;
-          line-height: 1.5;
-        }
-      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="content-section active">
         <h2>Page 1</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-          tempore! Incidunt iure similique sed cum consequatur veritatis
-          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
-          officia, quia, eius laboriosam provident iste.
-        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
       </div>
 
       <div class="content-section">
         <h2>Page 2</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-          tempore! Incidunt iure similique sed cum consequatur veritatis
-          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
-          officia, quia, eius laboriosam provident iste.
-        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
       </div>
 
       <div class="content-section">
         <h2>Page 3</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-          tempore! Incidunt iure similique sed cum consequatur veritatis
-          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
-          officia, quia, eius laboriosam provident iste.
-        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
       </div>
 
       <div class="content-section">
         <h2>Page 4</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-          tempore! Incidunt iure similique sed cum consequatur veritatis
-          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
-          officia, quia, eius laboriosam provident iste.
-        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
       </div>
 
       <div class="content-section">
         <h2>Page 5</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-          tempore! Incidunt iure similique sed cum consequatur veritatis
-          molestiae nisi deserunt saepe reprehenderit consectetur, blanditiis
-          officia, quia, eius laboriosam provident iste.
-        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 6</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 7</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 8</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 9</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Page 10</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil unde obcaecati quasi. Minima inventore sint iste sed itaque, aut, voluptatibus quaerat incidunt laboriosam quasi molestiae hic ab dicta nostrum adipisci.</p>
       </div>
 
       <div class="pagination">
         <button class="prev" disabled>Previous</button>
         <div class="numbers">
-          <button class="active">1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
         </div>
         <button class="next">Next</button>
       </div>
@@ -292,29 +238,67 @@
 
     <script>
       const contentSections = document.querySelectorAll(".content-section");
-      const numberButtons = document.querySelectorAll(".numbers button");
+      const numbersContainer = document.querySelector(".numbers");
       const prevButton = document.querySelector(".prev");
       const nextButton = document.querySelector(".next");
       let currentPage = 1;
+      const totalPages = 10; 
+      const visiblePages = 5;
+
+      function createPaginationButtons() {
+        numbersContainer.innerHTML = "";
+        
+        let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + visiblePages - 1);
+        
+        if (endPage - startPage + 1 < visiblePages) {
+          startPage = Math.max(1, endPage - visiblePages + 1);
+        }
+
+        if (startPage > 1) {
+          addPageButton(1);
+          if (startPage > 2) addDots();
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          addPageButton(i);
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) addDots();
+          addPageButton(totalPages);
+        }
+        updateButtonStates();
+      }
+
+      function addPageButton(pageNum) {
+        const button = document.createElement("button");
+        button.textContent = pageNum;
+        button.classList.toggle("active", pageNum === currentPage);
+        button.addEventListener("click", () => showPage(pageNum));
+        numbersContainer.appendChild(button);
+      }
+
+      function addDots() {
+        const dots = document.createElement("span");
+        dots.className = "dots";
+        dots.textContent = "...";
+        numbersContainer.appendChild(dots);
+      }
 
       function showPage(pageNumber) {
         contentSections.forEach((section, index) => {
           section.classList.toggle("active", index + 1 === pageNumber);
         });
-
-        numberButtons.forEach((button, index) => {
-          button.classList.toggle("active", index + 1 === pageNumber);
-        });
-
-        prevButton.disabled = pageNumber === 1;
-        nextButton.disabled = pageNumber === contentSections.length;
-
         currentPage = pageNumber;
+        createPaginationButtons();
+        updateButtonStates();
       }
 
-      numberButtons.forEach((button, index) => {
-        button.addEventListener("click", () => showPage(index + 1));
-      });
+      function updateButtonStates() {
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+      }
 
       prevButton.addEventListener("click", () => {
         if (currentPage > 1) {
@@ -323,10 +307,13 @@
       });
 
       nextButton.addEventListener("click", () => {
-        if (currentPage < contentSections.length) {
+        if (currentPage < totalPages) {
           showPage(currentPage + 1);
         }
       });
+
+      // Initialize pagination
+      createPaginationButtons();
     </script>
   </body>
 </html>

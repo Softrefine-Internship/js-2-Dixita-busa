@@ -23,48 +23,52 @@
         font-size: 11px;
         margin-bottom: -10px;
       }
-      html {
-        overflow: hidden;
-      }
       body {
         font-family: "Poppins";
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         width: 100vw;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
       .container {
         display: flex;
         flex-direction: column;
         background-color: white;
         gap: 4rem;
-        max-height: 100%;
         width: 100%;
         padding: 2rem;
         position: relative;
-        &::after {
-          content: "";
-          position: absolute;
-          height: 15rem;
-          z-index: 1;
-          width: 25rem;
-          top: 0%;
-          left: -20%;
-          background-image: radial-gradient(ellipse 40% 120% at top, #b797f6 -150%, rgba(255, 255, 255, 0) 100%);
-          filter: blur(20px);
-        }
-        &::before {
-          content: "";
-          position: absolute;
-          height: 30rem;
-          z-index: 1;
-          width: 25rem;
-          top: 10%;
-          left: -70%;
-          background-image: radial-gradient(ellipse 40% 80% at top, #f3c2fe -30%, rgba(255, 255, 255, 0) 100%);
-          filter: blur(45px);
-        }
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .background-gradients {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .gradient-1 {
+        position: absolute;
+        height: 15rem;
+        width: 25rem;
+        top: 0%;
+        left: -20%;
+        background-image: radial-gradient(ellipse 40% 120% at top, #b797f6 -150%, rgba(255, 255, 255, 0) 100%);
+        filter: blur(20px);
+      }
+      .gradient-2 {
+        position: absolute;
+        height: 30rem;
+        width: 25rem;
+        top: 10%;
+        left: -70%;
+        background-image: radial-gradient(ellipse 40% 80% at top, #f3c2fe -30%, rgba(255, 255, 255, 0) 100%);
+        filter: blur(45px);
       }
       .heading {
         display: flex;
@@ -72,6 +76,8 @@
         gap: 10px;
         align-self: center;
         text-align: center;
+        position: relative;
+        z-index: 1;
       }
       .heading h1 {
         font-size: 28px;
@@ -83,20 +89,25 @@
         color: #868e96;
       }
       .contact-us {
-        align-self: center;
         display: flex;
         flex-direction: column;
         gap: 20px;
-        max-height: 100%;
         width: 100%;
-        overflow-y: auto;
-        &::-webkit-scrollbar {
-          width: 0px;
-        }
+        position: relative;
+        z-index: 1;
       }
       .flname {
         display: flex;
         gap: 30px;
+      }
+      @media (max-width: 480px) {
+        .flname {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .notification input[type="checkbox"] + .policy {
+          font-size: 12px;
+        }
       }
       .fname,
       .lname {
@@ -114,7 +125,7 @@
         border: 1px solid rgba(128, 128, 128, 0.328);
         box-shadow: 0 0 5px rgba(128, 128, 128, 0.158);
         border-radius: 4px;
-        padding-left: 5px;
+        padding: 0 12px;
       }
       .fields {
         display: flex;
@@ -123,6 +134,9 @@
       }
       .text-area-message {
         height: 100px;
+        max-width: 100%;
+        min-width: 100%;
+        padding: 12px;
       }
       .country-code {
         color: rgba(128, 128, 128, 0.609);
@@ -130,6 +144,7 @@
         border-radius: 0px;
         align-self: stretch;
         background-color: white;
+        padding: 0 8px;
       }
       .phone {
         display: flex;
@@ -148,6 +163,9 @@
         border: none;
         border-radius: 0px;
         height: 100%;
+      }
+      .notification {
+        position: relative;
       }
       .notification input[type="checkbox"] {
         opacity: 0;
@@ -172,6 +190,7 @@
         background-color: rgba(128, 128, 128, 0.386);
         border-radius: 40px;
         margin-right: 3px;
+        flex-shrink: 0;
       }
       .notification input[type="checkbox"] + .policy::after {
         content: " ";
@@ -209,9 +228,6 @@
         font-size: 13px;
         font-weight: 600;
       }
-      .text-area-message {
-        padding: 5px;
-      }
       .policy a {
         color: #5f5fe3;
         font-weight: 600;
@@ -231,11 +247,13 @@
   <body>
     <main>
       <section class="container">
+        <div class="background-gradients">
+          <div class="gradient-1"></div>
+          <div class="gradient-2"></div>
+        </div>
         <header class="heading">
           <h1>Contact sales</h1>
-          <span
-            >Aute magna irure deserunt veniam aliqua magna enim voluptate.</span
-          >
+          <span>Aute magna irure deserunt veniam aliqua magna enim voluptate.</span>
         </header>
         <form class="contact-us">
           <div class="flname">
@@ -270,7 +288,7 @@
                 <option value="+61">Australia</option>
                 <option value="+81">Japan</option>
               </select>
-              <input type="number" class="phone" name="phone-number" />
+              <input type="tel" class="phone" name="phone-number" maxlength="15" />
             </div>
             <p class="error-msg">Please enter your phone number</p>
           </div>
@@ -279,132 +297,126 @@
             <textarea class="text-area-message" name="user-message"></textarea>
           </div>
           <div class="notification">
-            <input
-              type="checkbox"
-              class="toggle"
-              id="check"
-              name="agree-policy"
-            />
+            <input type="checkbox" class="toggle" id="check" name="agree-policy" />
             <label for="check" class="policy">
-              By selecting this, you agree to out <a>privacy policy.</a>
+              By selecting this, you agree to our <a>privacy policy.</a>
             </label>
           </div>
-          <button type="submit" name="submit-form" class="btn">
-            Let's talk
-          </button>
+          <button type="submit" name="submit-form" class="btn">Let's talk</button>
         </form>
       </section>
     </main>
-  </body>
-  <script>
-    const submitBtn = document.querySelector(".btn");
-    function isValidEmail(email) {
-      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      return emailPattern.test(email);
-    }
-    function isValidPhoneNumber(phone, country) {
-      const phonePatterns = {
-        "+1": /^\d{10}$/,
-        "+44": /^\d{11}$/,
-        "+91": /^\d{10}$/,
-        "+61": /^\d{10}$/,
-        "+81": /^\d{10,11}$/,
+    <script>
+      const submitBtn = document.querySelector(".btn");
+      function isValidEmail(email) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+      }
+      function isValidPhoneNumber(phone, country) {
+        const phonePatterns = {
+          "+1": /^\d{10}$/,
+          "+44": /^\d{11}$/,
+          "+91": /^\d{10}$/,
+          "+61": /^\d{10}$/,
+          "+81": /^\d{10,11}$/,
+        };
+        return phonePatterns[country].test(phone);
+      }
+      const countrySelect = document.querySelector(".country-code");
+      const phoneInput = document.querySelector('input[name="phone-number"]');
+      const phonePlaceholders = {
+        "+1": "1234567890",
+        "+44": "07123456789",
+        "+91": "9876543210",
+        "+61": "0412345678",
+        "+81": "09012345678",
       };
-      return phonePatterns[country].test(phone);
-    }
-    const countrySelect = document.querySelector(".country-code");
-    const phoneInput = document.querySelector('input[name="phone-number"]');
-    const phonePlaceholders = {
-      "+1": "1234567890",
-      "+44": "07123456789",
-      "+91": "9876543210",
-      "+61": "0412345678",
-      "+81": "09012345678",
-    };
-    countrySelect.addEventListener("change", function () {
-      phoneInput.placeholder = phonePlaceholders[this.value];
-    });
-    phoneInput.placeholder = phonePlaceholders[countrySelect.value];
-
-    submitBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      const firstName = document.querySelector('input[name="fname"]');
-      const lastName = document.querySelector('input[name="lname"]');
-      const company = document.querySelector('input[name="company"]');
-      const email = document.querySelector('input[name="email"]');
-      const phone = document.querySelector('input[name="phone-number"]');
-      const checkbox = document.querySelector('input[name="agree-policy"]');
-      const selectedCountry = document.querySelector(".country-code").value;
-      const allInputs = [firstName, lastName, company, email, phone];
-      allInputs.forEach((input) => {
-        input.classList.remove("error");
-        const errorMsg = input
-          .closest(".fname, .lname, .fields, .notification")
-          ?.querySelector(".error-msg");
-        if (errorMsg) errorMsg.style.display = "none";
+      countrySelect.addEventListener("change", function () {
+        phoneInput.placeholder = phonePlaceholders[this.value];
       });
-      checkbox.closest(".notification").querySelector(".error-msg")?.remove();
-      let isValid = true;
-      if (!firstName.value.trim()) {
-        firstName.classList.add("error");
-        firstName.closest(".fname").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      }
-      if (!lastName.value.trim()) {
-        lastName.classList.add("error");
-        lastName.closest(".lname").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      }
-      if (!company.value.trim()) {
-        company.classList.add("error");
-        company.closest(".fields").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      }
-      if (!email.value.trim()) {
-        email.classList.add("error");
-        email.closest(".fields").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      } else if (!isValidEmail(email.value.trim())) {
-        email.classList.add("error");
-        email.closest(".fields").querySelector(".error-msg").textContent =
-          "Please enter a valid email-id";
-        email.closest(".fields").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      }
-      if (!phone.value.trim()) {
-        phone.classList.add("error");
-        phone.closest(".fields").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      } else if (!isValidPhoneNumber(phone.value.trim(), selectedCountry)) {
-        phone.classList.add("error");
-        phone
-          .closest(".fields")
-          .querySelector(".error-msg").textContent = `Please enter a valid ${
-          countrySelect.options[countrySelect.selectedIndex].text
-        } phone number`;
-        phone.closest(".fields").querySelector(".error-msg").style.display =
-          "block";
-        isValid = false;
-      }
-      if (!checkbox.checked) {
-        const errorMsg = document.createElement("p");
-        errorMsg.className = "error-msg";
-        errorMsg.textContent = "You must agree to the privacy policy";
-        errorMsg.style.display = "block";
-        checkbox.closest(".notification").appendChild(errorMsg);
-        isValid = false;
-      }
-      if (isValid) {
-        alert("Form submitted successfully!");
-        document.querySelector(".contact-us").reset();
-        phoneInput.placeholder = phonePlaceholders[countrySelect.value];
-      }
-    });
-  </script>
+      phoneInput.placeholder = phonePlaceholders[countrySelect.value];
+
+      submitBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        const firstName = document.querySelector('input[name="fname"]');
+        const lastName = document.querySelector('input[name="lname"]');
+        const company = document.querySelector('input[name="company"]');
+        const email = document.querySelector('input[name="email"]');
+        const phone = document.querySelector('input[name="phone-number"]');
+        const checkbox = document.querySelector('input[name="agree-policy"]');
+        const selectedCountry = document.querySelector(".country-code").value;
+        const allInputs = [firstName, lastName, company, email, phone];
+        allInputs.forEach((input) => {
+          input.classList.remove("error");
+          const errorMsg = input
+            .closest(".fname, .lname, .fields, .notification")
+            ?.querySelector(".error-msg");
+          if (errorMsg) errorMsg.style.display = "none";
+        });
+        checkbox.closest(".notification").querySelector(".error-msg")?.remove();
+        let isValid = true;
+        if (!firstName.value.trim()) {
+          firstName.classList.add("error");
+          firstName.closest(".fname").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        }
+        if (!lastName.value.trim()) {
+          lastName.classList.add("error");
+          lastName.closest(".lname").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        }
+        if (!company.value.trim()) {
+          company.classList.add("error");
+          company.closest(".fields").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        }
+        if (!email.value.trim()) {
+          email.classList.add("error");
+          email.closest(".fields").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        } else if (!isValidEmail(email.value.trim())) {
+          email.classList.add("error");
+          email.closest(".fields").querySelector(".error-msg").textContent =
+            "Please enter a valid email-id";
+          email.closest(".fields").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        }
+        if (!phone.value.trim()) {
+          phone.classList.add("error");
+          phone.closest(".fields").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        } else if (!isValidPhoneNumber(phone.value.trim(), selectedCountry)) {
+          phone.classList.add("error");
+          phone
+            .closest(".fields")
+            .querySelector(".error-msg").textContent = `Please enter a valid ${
+            countrySelect.options[countrySelect.selectedIndex].text
+          } phone number`;
+          phone.closest(".fields").querySelector(".error-msg").style.display =
+            "block";
+          isValid = false;
+        }
+        if (!checkbox.checked) {
+          const errorMsg = document.createElement("p");
+          errorMsg.className = "error-msg";
+          errorMsg.textContent = "You must agree to the privacy policy";
+          errorMsg.style.display = "block";
+          checkbox.closest(".notification").appendChild(errorMsg);
+          isValid = false;
+        }
+        if (isValid) {
+          alert("Form submitted successfully!");
+          document.querySelector(".contact-us").reset();
+          phoneInput.placeholder = phonePlaceholders[countrySelect.value];
+        }
+      });
+    </script>
+  </body>
 </html>
+</antArtif

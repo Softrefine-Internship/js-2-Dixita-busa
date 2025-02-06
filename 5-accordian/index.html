@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Head content same until style -->
+  <!-- Head content remains the same until style -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -71,7 +71,7 @@
         padding: 2rem 3rem;
         max-height: 0;
         overflow: hidden;
-        transition: all 0.3s ease-in;
+        transition: all 0.3s ease-in-out;
       }
       .section-content span {
         color: rgb(243, 47, 47);
@@ -83,7 +83,7 @@
       .not-visible {
         display: none;
       }
-      
+
       @media (min-width: 1500px) {
         .wrapper {
           width: 90%;
@@ -166,15 +166,16 @@
     <div class="wrapper">
       <div class="main-box">
         <div class="section">
-          <div class="section-title">
+          <div class="section-title" style="color: #2E7BD7;">
             <p>Accordion Item #1</p>
             <ion-icon
-              class="not-visible arrow-up"
+              class="arrow-up"
               name="chevron-up-outline"
+              style="color: #2E7BD7;"
             ></ion-icon>
-            <ion-icon class="arrow-down" name="chevron-down-outline"></ion-icon>
+            <ion-icon class="arrow-down not-visible" name="chevron-down-outline"></ion-icon>
           </div>
-          <div class="section-content not-visible">
+          <div class="section-content content-visible">
             <p>
               <b>This is the first item's accordion body.</b> It is shown by
               default, until the collapse plugin adds the appropriate classes
@@ -199,7 +200,7 @@
           <div class="section-content not-visible">
             <p>
               <b>This is the second item's accordion body.</b> It is show by
-              default, until the collapse plugin adds appropriate classes that
+              default, until the collapse plugin adds the appropriate classes that
               we use to style each element. These classes control the overall
               appearnce, as well as the showing and hiding via CSS transitions.
               You can modify any of this with custom CSS or overriding our
@@ -221,7 +222,7 @@
           <div class="section-content not-visible">
             <p>
               <b>This is the third item's accordion body.</b> It is show by
-              default, until the collapse plugin adds appropriate classes that
+              default, until the collapse plugin adds the appropriate classes that
               we use to style each element. These classes control the overall
               appearnce, as well as the showing and hiding via CSS transitions.
               You can modify any of this with custom CSS or overriding our
